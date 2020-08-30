@@ -13,10 +13,63 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="排序算法">
+      <UniqueIdentifier>{50379de1-06c8-4a1b-9ae2-5c4bd9afe164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="查找算法">
+      <UniqueIdentifier>{69187576-a747-454a-b573-e8fe3939badf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="线性数据结构">
+      <UniqueIdentifier>{348c07e8-da3b-4c60-a326-580b2954f865}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlgorithmicAndDataStructure.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="unitTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Student.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Student.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="unitTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertionSort.h">
+      <Filter>排序算法</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionSort.h">
+      <Filter>排序算法</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearSearch.h">
+      <Filter>查找算法</Filter>
+    </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>线性数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="Deque.h">
+      <Filter>线性数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>线性数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>线性数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>线性数据结构</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
