@@ -161,10 +161,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="BinarySearch.h" />
+    <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="Deque.h" />
     <ClInclude Include="InsertionSort.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="MergeSort.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="QuickSort.h" />
     <ClInclude Include="SelectionSort.h" />
     <ClInclude Include="LinearSearch.h" />
     <ClInclude Include="pch.h" />

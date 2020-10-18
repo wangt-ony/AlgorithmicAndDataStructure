@@ -22,18 +22,24 @@
     <Filter Include="线性数据结构">
       <UniqueIdentifier>{348c07e8-da3b-4c60-a326-580b2954f865}</UniqueIdentifier>
     </Filter>
+    <Filter Include="二叉搜索树">
+      <UniqueIdentifier>{9e2e90b6-5d62-481b-9f97-8f14bbd6619e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="集合与映射">
+      <UniqueIdentifier>{975efb47-22e6-4f14-8ec5-a15b471ba9a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlgorithmicAndDataStructure.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="unitTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Student.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="unitTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,6 +76,18 @@
     </ClInclude>
     <ClInclude Include="Stack.h">
       <Filter>线性数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="MergeSort.h">
+      <Filter>排序算法</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickSort.h">
+      <Filter>排序算法</Filter>
+    </ClInclude>
+    <ClInclude Include="BinarySearch.h">
+      <Filter>查找算法</Filter>
+    </ClInclude>
+    <ClInclude Include="BinarySearchTree.h">
+      <Filter>二叉搜索树</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

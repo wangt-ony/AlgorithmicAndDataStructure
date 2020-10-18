@@ -6,16 +6,24 @@
 #include"LinearSearch.h"
 #include"SelectionSort.h"
 #include"InsertionSort.h"
+#include"MergeSort.h"
 #include"Student.h"
 #include"Array.h"
 #include"Stack.h"
 #include"Queue.h"
 #include"Deque.h"
 #include"LinkedList.h"
+#include"QuickSort.h"
+#include"BinarySearch.h"
+#include"BinarySearchTree.h"
+#define _CRTDBG_MAP_ALLOC
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+
 
 namespace UnitTest
 {
+	void makeSpectialArray(int array[], int sourceArray[], int left, int right, int i);
 	TEST_CLASS(LinearSearchTest)
 	{
 	public:
@@ -79,7 +87,7 @@ namespace UnitTest
 		TEST_METHOD(randamIntTest)
 		{
 			int size =10000;
-			int* array = creatRandomIntArray(size);
+			int* array = createRandomIntArray(size);
 			
 			testSort(SelectionSort, array, size);
 			
@@ -113,7 +121,7 @@ namespace UnitTest
 		TEST_METHOD(randamIntTest)
 		{
 			int size = 10000;
-			int* array = creatRandomIntArray(size);
+			int* array = createRandomIntArray(size);
 
 			testSort(InsertionSort, array, size);
 
@@ -375,6 +383,20 @@ namespace UnitTest
 				Assert::AreEqual(i+1, list.get(i));
 		}
 
+		TEST_METHOD(RemoveElementTest)
+		{
+			LinkedList<int>list;
+			for (int i = 0; i < 10; ++i)
+				list.add(i, i);
+
+			list.removeElement(5);
+
+			for (int i = 0; i < 5; ++i)
+				Assert::AreEqual(i, list.get(i));
+			for (int i = 5; i < 9; ++i)
+				Assert::AreEqual(i + 1, list.get(i));
+		}
+
 		TEST_METHOD(SetTest)
 		{
 			LinkedList<int>list;
@@ -387,8 +409,311 @@ namespace UnitTest
 		}
 	};
 
+	TEST_CLASS(mergeSortTest)
+	{
+		TEST_METHOD(MergeTest)
+		{
+			int* tempArray = new int[10];
+			int array[10] = { 1,3,5,7,9,2,4,6,8,10 };
+			merge(array,(size_t) 0, (size_t)5, (size_t)10, tempArray);
 
-	int* creatIntReverseArray(int size)
+			for (size_t i = 0; i < 9; ++i)
+			{
+				Assert::IsTrue(array[i] < array[i + 1]);
+			}
+			delete[] tempArray;
+		}
+		TEST_METHOD(MergeSortTest)
+		{
+			int* array = createRandomIntArray(20);
+			mergeSort(array, 20);
+
+			for (size_t i = 0; i < 19; ++i)
+			{
+				Assert::IsTrue(array[i] <= array[i + 1]);
+			}
+			delete[] array;
+		}
+	};
+
+	TEST_CLASS(QuickSortTest)
+	{
+		TEST_METHOD(PartitionTest)
+		{
+			int* array = createRandomIntArray(20);
+			size_t j= partition2(array, 0, 19,1);
+
+			for (size_t i = 0; i < j; ++i)
+				Assert::IsTrue(array[i] <= array[j]);
+			for(size_t i=j+1;i<20;++i)
+				Assert::IsTrue(array[i] >= array[j]);
+			delete[] array;
+		}
+		TEST_METHOD(quickSortTest)
+		{
+			int* array = createRandomIntArray(100);
+			quickSort(array, 100);
+
+			for (size_t i = 0; i < 9; ++i)
+			{
+				Assert::IsTrue(array[i] <= array[i + 1]);
+			}
+			delete[] array;
+		}
+
+		TEST_METHOD(makeSpecialArrayTest)
+		{
+			
+			int* sourceArray = new int[100];
+			for (int i = 0; i < 100; ++i)
+				sourceArray[i] = i;
+			int* array = new int[100];
+			makeSpectialArray(array, sourceArray, 0, 99, 0);
+			int p = 0;
+			for (int i = 0; i < 100; ++i)
+			{
+				Assert::AreEqual(i, array[(i + 99) / 2]);
+				std::swap(array[i], array[(i + 99) / 2]);
+			}
+		}
+	};
+
+	TEST_CLASS(BinarySearchTest)
+	{
+		TEST_METHOD(searchTest)
+		{
+			int* tempArray = new int[10];
+			int array[10] = {0,1,2,3,4,5,6,7,8,9 };
+			int index = BinarySearch(array, 10, 3);
+			Assert::AreEqual(3, index);
+
+			index = BinarySearch(array, 10, 9);
+			Assert::AreEqual(9, index);
+		
+			index = BinarySearch(array, 10, 10);
+			Assert::AreEqual(-1, index);
+			delete[] tempArray;
+
+		}
+
+		TEST_METHOD(iterator_searchTest)
+		{
+			int* tempArray = new int[10];
+			int array[10] = { 0,1,2,3,4,5,6,7,8,9 };
+			int index = BinarySearch_iteration(array, 10, 3);
+			Assert::AreEqual(3, index);
+
+			index = BinarySearch_iteration(array, 10, 9);
+			Assert::AreEqual(9, index);
+
+			index = BinarySearch_iteration(array, 10, 10);
+			Assert::AreEqual(-1, index);
+			delete[] tempArray;
+		}
+	};
+
+
+	TEST_CLASS(BinarySearchTreeTest)
+	{
+		TEST_METHOD(searchTreeTest)
+		{
+			int* tempArray = new int[10] {5, 3, 2, 7, 8, 6, 4, 1, 9};
+			
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i < 10; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			for (int i = 0; i < 10; ++i) {
+				Assert::IsTrue(binarySearchTree.contains(i));
+			}
+			Assert::IsFalse(binarySearchTree.contains(10));
+
+			delete[] tempArray;
+
+		}
+
+		TEST_METHOD(preOrdeTest)
+		{
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8};
+			int* aimArray = new int[6]{ 5,3,2,4,6,8 };
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i <6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			std::vector<int>outPut= binarySearchTree.preOrder();
+			for (int i=0;i<6;++i)
+			{
+				Assert::AreEqual(aimArray[i], outPut[i]);
+			}
+			delete[] tempArray;
+
+		}
+
+		TEST_METHOD(preOrdeNrTest)
+		{
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8 };
+			int* aimArray = new int[6]{ 5,3,2,4,6,8 };
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			std::vector<int>outPut = binarySearchTree.preOrderNR();
+			for (int i = 0; i < 6; ++i)
+			{
+				Assert::AreEqual(aimArray[i], outPut[i]);
+			}
+			delete[] tempArray;
+
+		}
+
+		TEST_METHOD(levelOrdeNrTest)
+		{
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8 };
+			int* aimArray = new int[6]{ 5,3,6,2,4,8 };
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			std::vector<int>outPut = binarySearchTree.levelOrder();
+			for (int i = 0; i < 6; ++i)
+			{
+				Assert::AreEqual(aimArray[i], outPut[i]);
+			}
+			delete[] tempArray;
+			delete[] aimArray;
+		}
+
+		TEST_METHOD(MaximumTest)
+		{
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8 };
+			
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			int value= binarySearchTree.maximum();
+			Assert::AreEqual(8, value);
+			delete[] tempArray;
+
+		}
+
+		TEST_METHOD(MinimumTest)
+		{
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8 };
+
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			int value = binarySearchTree.minimum();
+			Assert::AreEqual(2, value);
+			delete[] tempArray;
+
+		}
+
+		TEST_METHOD(removeMinTest)
+		{
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8 };
+
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			std::vector<int>outPuts;
+			for (int i = 0; i < 6; ++i)
+				outPuts.push_back(binarySearchTree.removeMin());
+
+			for (int i = 1; i < 6; ++i)
+				Assert::IsTrue(outPuts[i] > outPuts[i - 1]);
+		}
+
+		TEST_METHOD(removeMaxTest)
+		{
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8 };
+
+			BinarySearchTree<int>binarySearchTree;
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+
+			std::vector<int>outPuts;
+			for (int i = 0; i < 6; ++i)
+				outPuts.push_back(binarySearchTree.removeMax());
+
+			for (int i = 1; i < 6; ++i)
+				Assert::IsTrue(outPuts[i] < outPuts[i - 1]);
+			delete[] tempArray;
+		}
+		
+		TEST_METHOD(removeTest)
+		{
+			
+
+			_CrtSetBreakAlloc(155);
+
+			int* tempArray = new int[6]{ 5, 3, 6,2,4,8 };
+			int* aimArray_1 = new int[6]{ 8,6,5,4,3,2 };
+			int* aimArray_2 = new int[5]{8,6,4,3,2 };
+
+			BinarySearchTree<int>binarySearchTree;
+			
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+			
+			binarySearchTree.remove(9);
+			
+			int size = binarySearchTree.size();
+			std::vector<int>outPuts;
+			for (int i = 0; i < 6; ++i)
+				outPuts.push_back(binarySearchTree.removeMax());
+
+			
+			Assert::AreEqual(6, size);
+
+			for (int i = 0; i < size; ++i)
+				Assert::AreEqual(aimArray_1[i],outPuts[i]);
+
+
+			
+			for (int i = 0; i < 6; ++i)
+			{
+				binarySearchTree.add(tempArray[i]);
+			}
+			binarySearchTree.remove(5);
+			size = binarySearchTree.size();
+			outPuts.clear();
+			Assert::AreEqual(5, size);
+			for (int i = 0; i < 5; ++i)
+				Assert::AreEqual(aimArray_2[i], binarySearchTree.removeMax());
+			delete[] tempArray;
+			delete[] aimArray_1;
+			delete[] aimArray_2;
+			
+
+			
+		}
+
+	};
+
+
+	int* createIntReverseArray(int size)
 	{
 		int* array = new int[size];
 
@@ -399,7 +724,7 @@ namespace UnitTest
 		return array;
 	}
 
-	int* creatRandomIntArray(int size)
+	int* createRandomIntArray(int size)
 	{
 		int* array = new int[size];
 		std::default_random_engine e;
@@ -411,7 +736,16 @@ namespace UnitTest
 		return array;
 	}
 
+	void makeSpectialArray(int array[],int sourceArray[],int left,int right,int i)
+	{
+		if (left > right)
+			return;
+		array[left] = sourceArray[i];
+		makeSpectialArray(array, sourceArray, left+1, right, i + 1);
+		std::swap(array[left], array[(left + right) / 2]);
+	}
 
+	
 }
 
 

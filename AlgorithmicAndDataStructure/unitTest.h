@@ -5,8 +5,8 @@
 #include<string>
 namespace UnitTest
 {
-	int* creatIntReverseArray(int size);
-	int* creatRandomIntArray(int size);
+	int* createIntReverseArray(int size);
+	int* createRandomIntArray(int size);
 }
 
 template<typename T>

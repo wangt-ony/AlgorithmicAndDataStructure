@@ -2,9 +2,24 @@
 //
 #include"pch.h"
 #include <iostream>
+#include"MergeSort.h"
+#include<random>
+#include"BinarySearchTree.h"
+int* createRandomIntArray(int size)
+{
+	int* array = new int[size];
+	std::default_random_engine e;
+	std::uniform_int_distribution<int> u(0, size);
+	for (int i = 0; i < size; ++i)
+	{
+		array[i] = u(e);
+	}
+	return array;
+}
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	
 }
 
